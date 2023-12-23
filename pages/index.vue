@@ -14,6 +14,7 @@ const toggleLogin = () => {
 
 <template>
   <p>home page</p>
+  <p>{{ userStore.user }}</p>
 
   <button @click="toggleLogin">{{ !userStore.user ? 'Login' : 'Logout' }}</button>
   <NuxtLink to="/settings">To Settings</NuxtLink>

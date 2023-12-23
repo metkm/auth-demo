@@ -1,13 +1,20 @@
 export const useUserStore = defineStore("user", () => {
-  const user = ref<{ id: number }>();
+  const user = ref<any>();
 
-  const login = () => {
-    user.value = { id: 1 };
+  const getUser = async () => {
+    const response = await $fetch<any>("https://randomuser.me/api/");
+    return response.results[0].name.first;
+  }
+
+  const login = async () => {
+    user.value = await getUser();
   }
 
   const refresh = async () => {
-    console.log("refreshing user");
-    console.log("updating the store");
+    const newUser = await getUser();
+    user.value = newUser;
+
+    return newUser;
   }
 
   const reset = () => {
@@ -20,4 +27,6 @@ export const useUserStore = defineStore("user", () => {
     reset,
     login,
   }
+}, {
+  persist: true
 })

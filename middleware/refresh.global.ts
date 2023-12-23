@@ -1,10 +1,10 @@
-<script setup lang="ts">
-import { useUserStore } from './store/user';
+import { useUserStore } from "../store/user";
 
-const userStore = useUserStore();
+export default defineNuxtRouteMiddleware(async () => {
+  const userStore = useUserStore();
 
-if (userStore.user) {
   const { data, error } = await useAsyncData(async () => {
+    if (!userStore.user) return;
     return await userStore.refresh();
   });
 
@@ -13,11 +13,4 @@ if (userStore.user) {
   } else if (data.value) {
     userStore.user = data.value;
   }
-}
-</script>
-
-<template>
-  <NuxtLayout>
-    <NuxtPage />
-  </NuxtLayout>
-</template>
+});
