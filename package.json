@@ -18,6 +18,9 @@
   },
   "dependencies": {
     "@pinia/nuxt": "^0.5.1",
-    "pinia": "^2.1.7"
+    "@vee-validate/zod": "^4.12.3",
+    "pinia": "^2.1.7",
+    "vee-validate": "^4.12.3",
+    "zod": "^3.22.4"
   }
 }
